@@ -1,14 +1,14 @@
-# Use an OpenJDK image
-FROM openjdk:17-jdk-slim
+# Use Tomcat 11 as the base image
+FROM tomcat:11.0.3-jdk17-temurin
 
 # Set working directory
-WORKDIR /app
+WORKDIR /usr/local/tomcat/webapps
 
-# Copy your project files (adjust if using Maven or Gradle)
-COPY target/*.war /app/app.war
+# Copy the WAR file to the Tomcat webapps directory
+COPY target/demo1-1.0-SNAPSHOT.war ./ROOT.war
 
-# Expose the port your app runs on (e.g., 8080)
+# Expose port 8080 (Tomcat default)
 EXPOSE 8080
 
-# Run the JEE application using an application server (like Tomcat or Payara)
-CMD ["java", "-jar", "/app/app.war"]
+# Start Tomcat
+CMD ["catalina.sh", "run"]
