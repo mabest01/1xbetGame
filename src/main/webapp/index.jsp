@@ -8,6 +8,6 @@
 <h1><%= "Hello World!" %>
 </h1>
 <br/>
-<a href="/vues/jeu.jsp">Hello Servlet</a>
+<a href="/jeu.jsp">Hello Servlet</a>
 </body>
 </html>
