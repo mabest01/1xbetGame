@@ -34,7 +34,7 @@ public class JouerServlet extends HttpServlet {
             req.getSession().setAttribute("doitjouer", 0);
         }
 
-        req.getRequestDispatcher("/jeu.jsp").forward(req, resp);
+        req.getRequestDispatcher("/index.jsp").forward(req, resp);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class JouerServlet extends HttpServlet {
             req.getSession().setAttribute("doitjouer", 0);
             req.setAttribute("msg", "Nombre de tentatives dépassé !  "+ " 🤣 Le nombre est : "+ traitement.getNombre_aleatoire());
             req.setAttribute("type_msg", "alert-danger");
-            req.getRequestDispatcher("/jeu.jsp").forward(req, resp);
+            req.getRequestDispatcher("/index.jsp").forward(req, resp);
             return;
         }
 
@@ -62,7 +62,7 @@ public class JouerServlet extends HttpServlet {
             if (nombre_saisi < 0) {
                 req.setAttribute("nbr_txt", nombre_saisi);
                 req.setAttribute("nbr_error", "Veuillez saisir un nombre positif !");
-                req.getRequestDispatcher("/jeu.jsp").forward(req, resp);
+                req.getRequestDispatcher("/index.jsp").forward(req, resp);
                 return;
             }
 
@@ -88,6 +88,6 @@ public class JouerServlet extends HttpServlet {
             req.setAttribute("nbr_error", "Veuillez saisir un nombre valide !");
         }
 
-        req.getRequestDispatcher("/jeu.jsp").forward(req, resp);
+        req.getRequestDispatcher("/index.jsp").forward(req, resp);
     }
 }
