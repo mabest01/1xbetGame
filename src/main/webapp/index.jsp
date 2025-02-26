@@ -9,7 +9,18 @@
     <title>Jeu du Nombre Aléatoire</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-
+        .footer {
+            text-align: center;
+            font-size: 16px;
+            font-family: Arial, sans-serif;
+            color: #fff;
+            background-color: #333;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            width: fit-content;
+            margin: 20px auto;
+        }
         body {
             background: linear-gradient(to right, #6a11cb, #2575fc);
             color: white;
@@ -87,12 +98,10 @@
                 <small>⏳ Nombre de tentatives restantes : <strong>${(sessionScope.nbr_tentatives != null ? sessionScope.nbr_tentatives : 0 )+1}</strong> / 3</small>
             </c:if>
         </div>
-        <div class="card-footer text-muted text-center py-2">
-            <c:if test="${sessionScope.doitjouer == 1}">
-                <small>le nbr est :<strong>${(doitjouer != 0 ? '' : '' )}</strong> / 3</small>
-            </c:if>
-        </div>
     </div>
+</div>
+<div class="footer">
+    Made with ❤️ by <strong>EL MAHDI ALOUI</strong> 2025
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

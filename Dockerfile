@@ -1,14 +1,21 @@
-# Use OpenJDK 17 base image
-FROM openjdk:17-jdk-slim
-
-# Set working directory
+# Use Maven to build the project
+FROM maven:3.8.8-eclipse-temurin-17 AS build
 WORKDIR /app
 
-# Copy the WAR file from the target directory (make sure the WAR file exists at this location)
-COPY target/*.war /app/app.war
+# Copy source code
+COPY . .
 
-# Expose the port that your application will run on (e.g., Tomcat default port)
+# Build the WAR file
+RUN mvn clean package
+
+# Use Tomcat 11 with Java 17
+FROM tomcat:11-jdk17
+
+# Copy the generated WAR file to Tomcat
+COPY --from=build /app/target/demo1-1.0-SNAPSHOT.war /usr/local/tomcat/webapps/demo1.war
+
+# Expose Tomcat's default port
 EXPOSE 8080
 
-# Run the JEE application using a servlet container like Tomcat (in this case, we are just running the WAR directly)
-CMD ["java", "-jar", "/app/app.war"]
+# Start Tomcat
+CMD ["catalina.sh", "run"]

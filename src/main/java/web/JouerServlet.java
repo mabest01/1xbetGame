@@ -46,14 +46,6 @@ public class JouerServlet extends HttpServlet {
             nbr_tentatives = 0;
         }
 
-        if (nbr_tentatives +1 >= traitement.getMax()) {
-            req.getSession().setAttribute("doitjouer", 0);
-            req.setAttribute("msg", "Nombre de tentatives dépassé !  "+ " 🤣 Le nombre est : "+ traitement.getNombre_aleatoire());
-            req.setAttribute("type_msg", "alert-danger");
-            req.getRequestDispatcher("/index.jsp").forward(req, resp);
-            return;
-        }
-
         String nbr_txt = req.getParameter("nombre_aleatoire");
 
         try {
@@ -68,20 +60,28 @@ public class JouerServlet extends HttpServlet {
 
             int result = traitement.verifierNombre(nombre_saisi);
 
-            if (result == -1) {
-                req.setAttribute("msg", "Un nombre plus petit !");
-                req.setAttribute("type_msg", "alert-warning");
-            } else if (result == 1) {
-                req.setAttribute("msg", "Un nombre plus grand !");
-                req.setAttribute("type_msg", "alert-warning");
-            } else {
-                req.setAttribute("msg", "Bravo !  Vous avez gagner 5dh ✌️🏆 douz 3nd la caisse ");
+            if (result == 0) {
+                // Le joueur a trouvé le bon nombre
+                req.setAttribute("msg", "Bravo !  Vous avez gagné 5 DH ✌️🏆 Douz 3nd la caisse !");
                 req.setAttribute("type_msg", "alert-success");
                 req.getSession().setAttribute("doitjouer", 0);
+                req.getSession().setAttribute("nbr_tentatives", nbr_tentatives + 1);
+                req.getRequestDispatcher("/index.jsp").forward(req, resp);
+                return;
             }
 
+            // Si ce n'est pas le bon nombre, on incrémente les tentatives
             nbr_tentatives++;
-            req.getSession().setAttribute("nbr_tentatives", nbr_tentatives);
+
+            if (nbr_tentatives >= traitement.getMax()) {
+                req.getSession().setAttribute("doitjouer", 0);
+                req.setAttribute("msg", "Nombre de tentatives dépassé ! 🤣 Le nombre était : " + traitement.getNombre_aleatoire());
+                req.setAttribute("type_msg", "alert-danger");
+            } else {
+                req.setAttribute("msg", result == -1 ? "Un nombre plus petit !" : "Un nombre plus grand !");
+                req.setAttribute("type_msg", "alert-warning");
+                req.getSession().setAttribute("nbr_tentatives", nbr_tentatives);
+            }
 
         } catch (NumberFormatException e) {
             req.setAttribute("nbr_txt", nbr_txt);
@@ -90,4 +90,5 @@ public class JouerServlet extends HttpServlet {
 
         req.getRequestDispatcher("/index.jsp").forward(req, resp);
     }
+
 }

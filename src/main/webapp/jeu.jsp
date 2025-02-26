@@ -36,6 +36,10 @@
   </style>
 </head>
 <body>
+<audio id="bg-music" autoplay loop>
+  <source src="src/main/1xbet.mp3" type="audio/mpeg">
+  Your browser does not support the audio tag.
+</audio>
 
 <div class="text-center my-4">
   <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ33xEI8VEfsLnYAU8cWIK3eapXD3t7eBHEJw&s"
@@ -72,7 +76,7 @@
 
         <div class="row g-3">
           <div class="col-md-6 text-center">
-            <button type="submit" class="btn btn-success w-100 py-2 fs-5" ${ doitjouer == 0 ? 'disabled' : '' }>🎲 Jouer</button>
+            <button onclick="document.getElementById('bg-music').play()" type="submit" class="btn btn-success w-100 py-2 fs-5" ${ doitjouer == 0 ? 'disabled' : '' }>🎲 Jouer</button>
           </div>
           <div class="col-md-6 text-center">
             <a href="payer" class="btn btn-warning w-100 py-2 fs-5" ${ doitjouer != 0 ? 'disabled' : '' }>💳 Payer / Réinitialiser</a>
@@ -86,15 +90,10 @@
       <c:if test="${sessionScope.doitjouer == 1}">
         <small>⏳ Nombre de tentatives restantes : <strong>${(sessionScope.nbr_tentatives != null ? sessionScope.nbr_tentatives : 0 )+1}</strong> / 3</small>
       </c:if>
-    </div>
-    <div class="card-footer text-muted text-center py-2">
-      <c:if test="${sessionScope.doitjouer == 1}">
-        <small>le nbr est :<strong>${(doitjouer != 0 ? '' : '' )}</strong> / 3</small>
-      </c:if>
-    </div>
+
   </div>
 </div>
-
+</div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
