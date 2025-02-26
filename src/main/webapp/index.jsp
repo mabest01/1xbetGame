@@ -48,6 +48,12 @@
 </head>
 <body>
 
+<!-- La musique se lit automatiquement et en boucle -->
+<audio id="bg-music" autoplay loop>
+    <source src="1xbet.mp3" >
+    Your browser does not support the audio tag.
+</audio>
+
 <div class="text-center my-4">
     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ33xEI8VEfsLnYAU8cWIK3eapXD3t7eBHEJw&s"
          alt="Logo" class="img-fluid rounded shadow-lg" style="max-width: 200px; height: auto;">
@@ -83,6 +89,7 @@
 
                 <div class="row g-3">
                     <div class="col-md-6 text-center">
+                        <!-- Le bouton ne fait plus jouer la musique, il se contente de soumettre le formulaire -->
                         <button type="submit" class="btn btn-success w-100 py-2 fs-5" ${ doitjouer == 0 ? 'disabled' : '' }>🎲 Jouer</button>
                     </div>
                     <div class="col-md-6 text-center">
@@ -100,6 +107,7 @@
         </div>
     </div>
 </div>
+
 <div class="footer">
     Made with ❤️ by <strong>EL MAHDI ALOUI</strong> 2025
 </div>
