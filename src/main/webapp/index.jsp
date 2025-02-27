@@ -49,7 +49,7 @@
 <body>
 
 <!-- La musique se lit automatiquement et en boucle -->
-<audio id="bg-music" autoplay loop>
+<audio id="bg-music" autoplay loop controls>
     <source src="1xbet.mp3" >
     Your browser does not support the audio tag.
 </audio>

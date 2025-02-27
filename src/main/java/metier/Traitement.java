@@ -1,5 +1,6 @@
 package metier;
 
+import java.security.SecureRandom;
 import java.util.Random;
 
 public class Traitement {
@@ -32,7 +33,7 @@ public class Traitement {
 
     public void genererNombre() {
 
-        Random rand = new Random();
+        Random rand = new SecureRandom();
         nombre_aleatoire = rand.nextInt(0, this.nbr_limite);
 
     }
